@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+
+  bdd-training-quarkus:
+    image: postgres:11.4
+    container_name: bdd-training-quarkus
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=test
+    ports: 
+      - "5432:5432"
+    networks:
+      - training-quarkus-network
+    volumes:
+      - postgresql-volume:/var/lib/postgresql/data
+
+networks:
+ training-quarkus-network:
+  driver: bridge
+
+volumes:
+    postgresql-volume:
+      external: true
